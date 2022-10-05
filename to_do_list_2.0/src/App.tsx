@@ -1,8 +1,13 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 
-function App() {
+export const App = () => {
+    return (
+        <Todolist/>
+    );
+}
+
+const Todolist = () => {
     return (
         <div className="App">
             <div>
@@ -24,7 +29,5 @@ function App() {
             </div>
 
         </div>
-    );
+    )
 }
-
-export default App;
