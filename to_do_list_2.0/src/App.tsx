@@ -12,6 +12,16 @@ export const App = () => {
         {id: 5, title: 'GraphQL', isDone: false}
     ])
 
+    let [filter, setFilter] = useState('all')
+
+    let taskForTodolist = tasks
+    if(filter === 'active'){
+        taskForTodolist = tasks.filter(t => t.isDone != false)
+    }
+    if(filter === 'completed'){
+        taskForTodolist = tasks.filter(t => t.isDone != true)
+    }
+
     const removeTask = (id: number) => {
         let filteredTasks = tasks.filter(t => t.id != id)
         setTasks(filteredTasks)
@@ -21,7 +31,7 @@ export const App = () => {
         <div className="App">
             <Todolist
                 title='What to learn'
-                task={tasks}
+                task={taskForTodolist}
                 removeTask={removeTask}
             />
         </div>
