@@ -28,7 +28,7 @@ export const Todolist = (props: PropsType) => {
                 </li>)}
             </ul>
             <div>
-                <button>All</button>
+                <button onClick={() => {props.changeFilter}}>All</button>
                 <button>Active</button>
                 <button>Completed</button>
             </div>
