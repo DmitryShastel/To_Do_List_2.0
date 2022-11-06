@@ -4,15 +4,16 @@ import {Todolist} from "./Todolist";
 
 export const App = () => {
 
-    let tasks = [
+    let [tasks, setTasks] = useState([
         {id: 1, title: 'HTML', isDone: true},
         {id: 2, title: 'JS', isDone: true},
         {id: 3, title: 'React', isDone: false},
         {id: 4, title: 'Rest API', isDone: false},
-    ]
+    ]);
 
     const removeTask = (id: number) => {
-        tasks = tasks.filter(t => t.id != t.id)
+        let filteredTasks = tasks.filter(t => t.id !== id)
+        setTasks(filteredTasks)
     }
 
 
