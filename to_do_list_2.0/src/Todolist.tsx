@@ -20,15 +20,10 @@ export const Todolist = (props: PropsType) => {
                 <button>+</button>
             </div>
             <ul>
-                <li>
-                    <input type='checkbox' checked={props.tasks[0].isDone}/><span>{props.tasks[0].title}</span>
+                {props.tasks.map(t => <li key={t.id}>
+                    <input type='checkbox' checked={t.isDone}/><span>{t.title}</span>
                     <button>x</button>
-                </li>
-                <li>
-                    <input type='checkbox' value='checked'/><span>{props.tasks[1].title}</span>
-                    <button>x</button>
-                </li>
-
+                </li>)}
             </ul>
             <div>
                 <button>All</button>
