@@ -7,8 +7,7 @@ type TaskType = {
 }
 type PropsType = {
     title: string
-    task: Array<TaskType>
-    removeTask: (id: number) => void
+    tasks: Array<TaskType>
 }
 
 export const Todolist = (props: PropsType) => {
@@ -21,12 +20,15 @@ export const Todolist = (props: PropsType) => {
                 <button>+</button>
             </div>
             <ul>
-                {props.task.map(t =>
-                    <li key={t.id}>
-                        <input type='checkbox' checked={t.isDone}/><span>{t.title}</span>
-                        <button onClick={() => props.removeTask(t.id)}>x</button>
-                    </li>
-                )}
+                <li>
+                    <input type='checkbox' checked={props.tasks[0].isDone}/><span>{props.tasks[0].title}</span>
+                    <button>x</button>
+                </li>
+                <li>
+                    <input type='checkbox' value='checked'/><span>{props.tasks[1].title}</span>
+                    <button>x</button>
+                </li>
+
             </ul>
             <div>
                 <button>All</button>
