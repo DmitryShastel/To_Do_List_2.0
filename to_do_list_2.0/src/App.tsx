@@ -9,10 +9,11 @@ export const App = () => {
         {id: 2, title: 'JS', isDone: true},
         {id: 3, title: 'React', isDone: false},
         {id: 4, title: 'Rest API', isDone: false},
-        {id: 5, title: 'GraphQL', isDone: false}
     ]
 
-
+    const removeTask = (id: number) => {
+        tasks = tasks.filter(t => t.id != t.id)
+    }
 
 
     return (
@@ -20,6 +21,7 @@ export const App = () => {
             <Todolist
                 title='What to learn'
                 tasks={tasks}
+                removeTask={removeTask}
             />
         </div>
     );
