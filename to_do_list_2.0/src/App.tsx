@@ -16,7 +16,7 @@ export const App = () => {
     ]);
 
     const addTask = () => {
-        let task = {id: v1(), title: 'New Task', isDone: true};
+        let task = {id: v1(), title: 'New Task', isDone: false};
         let newTask = [task, ...tasks]
         setTasks(newTask)
     }
@@ -43,6 +43,7 @@ export const App = () => {
                 tasks={tasksForTodolist}
                 removeTask={removeTask}
                 changeFilter={changeFilter}
+                addTask={addTask}
             />
         </div>
     );
