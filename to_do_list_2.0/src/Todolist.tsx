@@ -2,14 +2,14 @@ import React from "react";
 import {FilterType} from "./App";
 
 type TaskType = {
-    id: number
+    id: string
     title: string
     isDone: boolean
 }
 type PropsType = {
     title: string
     tasks: Array<TaskType>
-    removeTask: (id: number) => void
+    removeTask: (id: string) => void
     changeFilter: (value: FilterType) => void
 }
 

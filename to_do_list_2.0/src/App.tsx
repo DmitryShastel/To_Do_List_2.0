@@ -15,7 +15,7 @@ export const App = () => {
         {id: v1(), title: 'Rest API', isDone: false},
     ]);
 
-    const removeTask = (id: number) => {
+    const removeTask = (id: string) => {
         let filteredTasks = tasks.filter(t => t.id !== id)
         setTasks(filteredTasks)
     }
