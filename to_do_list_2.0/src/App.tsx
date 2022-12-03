@@ -15,11 +15,16 @@ export const App = () => {
         {id: v1(), title: 'Rest API', isDone: false},
     ]);
 
+    const addTask = () => {
+        let task = {id: v1(), title: 'New Task', isDone: true};
+        let newTask = [task, ...tasks]
+        setTasks(newTask)
+    }
+
     const removeTask = (id: string) => {
         let filteredTasks = tasks.filter(t => t.id !== id)
         setTasks(filteredTasks)
     }
-
     let tasksForTodolist = tasks
     if (filter === 'completed') {
         tasksForTodolist = tasks.filter(t => t.isDone === true)
@@ -27,8 +32,7 @@ export const App = () => {
     if (filter === 'active') {
         tasksForTodolist = tasks.filter(t => t.isDone === false)
     }
-
-    const changeFilter = (value: FilterType)=> {
+    const changeFilter = (value: FilterType) => {
         setFilter(value)
     }
 
