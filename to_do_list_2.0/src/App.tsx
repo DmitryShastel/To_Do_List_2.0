@@ -15,7 +15,7 @@ export const App = () => {
         {id: v1(), title: 'Rest API', isDone: false},
     ]);
 
-    const addTask = () => {
+    const addTask = (title: string) => {
         let task = {id: v1(), title: 'New Task', isDone: false};
         let newTask = [task, ...tasks]
         setTasks(newTask)
