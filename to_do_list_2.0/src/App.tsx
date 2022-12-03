@@ -20,7 +20,6 @@ export const App = () => {
         let newTask = [task, ...tasks]
         setTasks(newTask)
     }
-
     const removeTask = (id: string) => {
         let filteredTasks = tasks.filter(t => t.id !== id)
         setTasks(filteredTasks)
