@@ -26,6 +26,8 @@ export const Todolist = (props: PropsType) => {
         setTitle('')
     }
 
+    const onAllClickHandler = () =>  props.changeFilter('all')
+
     return (
         <div>
             <h3>{props.title}</h3>
@@ -44,9 +46,7 @@ export const Todolist = (props: PropsType) => {
                 </li>)}
             </ul>
             <div>
-                <button onClick={() => {
-                    props.changeFilter('all')
-                }}>All
+                <button onClick={onAllClickHandler}>All
                 </button>
                 <button onClick={() => {
                     props.changeFilter('active')
