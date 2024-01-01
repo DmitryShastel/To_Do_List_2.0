@@ -27,6 +27,7 @@ type PropsType = {
 }
 
 export const Todolist = (props: PropsType) => {
+    console.log('Todolist')
 
     let [title, setTitle] = useState('')
     let [error, setError] = useState<string | null>(null)

@@ -7,6 +7,7 @@ export type AddFormPropsType = {
 }
 
 export const AddItemForm = (props: AddFormPropsType) => {
+    console.log('AddItemForm')
 
     let [title, setTitle] = useState('')
     let [error, setError] = useState<string | null>(null)
@@ -26,7 +27,9 @@ export const AddItemForm = (props: AddFormPropsType) => {
     }
 
     const onKeyPressHandler = (e: KeyboardEvent | React.KeyboardEvent) => {
-        setError(null)
+        if(error !== null){
+            setError(null)
+        }
         if (e.keyCode === 13) {
             addItem()
         }
