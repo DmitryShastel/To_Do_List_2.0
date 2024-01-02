@@ -23,7 +23,6 @@ export type TasksType = {
 
 
 export const AppWithRedux = () => {
-    console.log('AppWithRedux')
 
     const todolists = useSelector<AppRootStateType, Array<TodolistsType>>(state => state.todolists)
     const tasks = useSelector<AppRootStateType, TasksType>(state => state.tasks)
@@ -76,15 +75,7 @@ export const AppWithRedux = () => {
                 <Grid container spacing={3}>
                     {
                         todolists.map((tl) => {
-
                             let tasksForTodolist = tasks[tl.id]
-
-                            // if (tl.filter === 'completed') {
-                            //     tasksForTodolist = tasksForTodolist.filter(t => t.isDone === true)
-                            // }
-                            // if (tl.filter === 'active') {
-                            //     tasksForTodolist = tasksForTodolist.filter(t => t.isDone === false)
-                            // }
 
                             return (
                                 <Grid item>
