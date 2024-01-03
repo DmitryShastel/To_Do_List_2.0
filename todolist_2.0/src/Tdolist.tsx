@@ -1,7 +1,7 @@
-import React, {ChangeEvent, useCallback} from "react";
+import React, {useCallback} from "react";
 import {EditableSpan} from "./EditableSpan";
 import {FilterType} from "./State/AppWithReducer";
-import {Button, Checkbox, IconButton} from "@mui/material";
+import {Button, IconButton} from "@mui/material";
 import {Delete} from "@mui/icons-material";
 import {AddItemForm} from "./AddItemForm";
 import {Task} from "./State/Task";
