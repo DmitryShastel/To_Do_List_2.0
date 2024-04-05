@@ -3,7 +3,7 @@ import {EditableSpan} from "./EditableSpan";
 import {FilterType} from "./State/AppWithReducer";
 import {Button, IconButton} from "@mui/material";
 import {Delete} from "@mui/icons-material";
-import {AddItemForm} from "./AddItemForm";
+import {AddItemForm} from "./AddItemForm/AddItemForm";
 import {Task} from "./State/Task";
 
 

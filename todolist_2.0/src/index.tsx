@@ -2,9 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import {AppWithRedux} from "./State/AppWithRedux";
 import {Provider} from "react-redux";
 import {store} from "./State/store";
+import {AppWithRedux} from "./AppWithRedux/AppWithRedux";
 
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
