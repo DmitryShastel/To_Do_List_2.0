@@ -69,5 +69,11 @@ export const todolistsAPI = {
     },
     deleteTask(todolistId: string, taskId: string) {
         return axios.delete<ResponseType>(`todo-lists/${todolistId}/tasks/${taskId}`)
+    },
+    createTask(todolistId: string, taskTitle: string){
+        return axios.post<ResponseType<TaskType>>(`todo-lists/${todolistId}/tasks`, {title: taskTitle})
+    },
+    updateTask(todolistId: string, taskId: string, model: UpdateTaskModelType){
+        return axios.put<ResponseType>(`todo-lists/${todolistId}/tasks/${taskId}`, model)
     }
 }
