@@ -13,22 +13,33 @@ const instance = axios.create({
     ...settings
 })
 
+export enum TaskStatuses {
+    New,
+    InProgress,
+    Completed,
+    Draft
+}
+
+export enum TaskPriorities {
+    Low,
+    Middle,
+    Hi,
+    Urgently,
+    Later
+}
+
+
 export type TodolistType = {
     id: string
     title: string
     addedDate: string
     order: number
 }
-type ResponseType<D = {}> = {
-    resultCode: number
-    messages: Array<string>
-    data: D
-}
 export type TaskType = {
     description: string
     title: string
-    status: number
-    priority: number
+    status: TaskStatuses
+    priority: TaskPriorities
     startDate: string
     deadline: string
     id: string
@@ -36,12 +47,16 @@ export type TaskType = {
     order: number
     addedDate: string
 }
+type ResponseType<D = {}> = {
+    resultCode: number
+    messages: Array<string>
+    data: D
+}
 type GetTasksResponse = {
     error: string | null
     totalCount: number
     items: TaskType[]
 }
-
 export type UpdateTaskModelType = {
     title: string
     description: string
@@ -50,6 +65,7 @@ export type UpdateTaskModelType = {
     startDate: string
     deadline: string
 }
+
 
 export const todolistsAPI = {
     getTodolists() {

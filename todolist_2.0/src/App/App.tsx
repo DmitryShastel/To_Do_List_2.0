@@ -1,19 +1,13 @@
 import React from 'react';
 import '../App.css';
 import {AddItemForm} from "../AddItemForm/AddItemForm";
-import {TaskType, Todolist} from "../Tdolist";
+import {Todolist} from "../Tdolist";
 import {Menu} from "@mui/icons-material";
 import {AppBar, Button, Container, Grid, IconButton, Paper, Toolbar, Typography} from "@mui/material";
 import {useTodolists} from "./hooks/useTodolists";
 import {useTasks} from "./hooks/useTasks";
+import {TaskStatuses, TaskType} from "../api/todolists-api";
 
-export type FilterType = 'all' | 'active' | 'completed'
-
-export type TodolistsType = {
-    id: string
-    title: string
-    filter: FilterType
-}
 
 export type TasksType = {
     [key: string]: TaskType[]
@@ -22,8 +16,10 @@ export type TasksType = {
 
 export const App = () => {
 
-    let {tasks, removeTask, changeTaskTitle, addTask, changeStatus,
-        completelyRemoveTasksForTodolist, addStateForNewTodolist} = useTasks()
+    let {
+        tasks, removeTask, changeTaskTitle, addTask, changeStatus,
+        completelyRemoveTasksForTodolist, addStateForNewTodolist
+    } = useTasks()
 
     let {todolists, removeTodolist, addTodolist, changeTodolistTitle, changeFilter} =
         useTodolists(completelyRemoveTasksForTodolist, addStateForNewTodolist)
@@ -53,10 +49,10 @@ export const App = () => {
 
                             let tasksForTodolist = tasks[tl.id]
                             if (tl.filter === 'completed') {
-                                tasksForTodolist = tasksForTodolist.filter(t => t.isDone === true)
+                                tasksForTodolist = tasksForTodolist.filter(t => t.status === TaskStatuses.Completed)
                             }
                             if (tl.filter === 'active') {
-                                tasksForTodolist = tasksForTodolist.filter(t => t.isDone === false)
+                                tasksForTodolist = tasksForTodolist.filter(t => t.status === TaskStatuses.New)
                             }
                             return (
                                 <Grid item>

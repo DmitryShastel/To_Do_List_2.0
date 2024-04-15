@@ -1,18 +1,11 @@
 import React from 'react';
 import {AddItemForm} from "../AddItemForm/AddItemForm";
-import {TaskType, Todolist} from "../Tdolist";
+import {Todolist} from "../Tdolist";
 import {AppBar, Button, Container, Grid, IconButton, Paper, Toolbar, Typography} from '@mui/material';
 import {Menu} from "@mui/icons-material";
 import {useAppWithRedux} from "./hooks/useAppWithRedux";
+import {TaskType} from "../api/todolists-api";
 
-
-export type FilterType = 'all' | 'active' | 'completed'
-
-export type TodolistsType = {
-    id: string
-    title: string
-    filter: FilterType
-}
 
 export type TasksType = {
     [key: string]: TaskType[]

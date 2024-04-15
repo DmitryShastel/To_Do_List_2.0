@@ -2,20 +2,22 @@ import {useState} from "react";
 import {todolistId1, todolistId2} from "../id-utils";
 import {v1} from "uuid";
 import {TasksType} from "../App";
+import {TaskPriorities, TaskStatuses} from "../../api/todolists-api";
+
 
 export const useTasks = () => {
     let [tasks, setTasks] = useState<TasksType>({
         [todolistId1]: [
-            {id: v1(), title: 'HTML', isDone: true},
-            {id: v1(), title: 'JS', isDone: true},
-            {id: v1(), title: 'React', isDone: false},
-            {id: v1(), title: 'Rest API', isDone: false},
+            {
+                id: v1(), title: 'HTML', status: TaskStatuses.Completed, todoListId: todolistId1,
+                description: '', startDate: '', deadline: '', addedDate: '', order: 0, priority: TaskPriorities.Low
+            },
         ],
         [todolistId2]: [
-            {id: v1(), title: 'Milk', isDone: true},
-            {id: v1(), title: 'Bread', isDone: true},
-            {id: v1(), title: 'Oil', isDone: false},
-            {id: v1(), title: 'Sugar', isDone: false},
+            {
+                id: v1(), title: 'HTML', status: TaskStatuses.Completed, todoListId: todolistId1,
+                description: '', startDate: '', deadline: '', addedDate: '', order: 0, priority: TaskPriorities.Low
+            },
         ]
     })
 
@@ -24,9 +26,6 @@ export const useTasks = () => {
         let filteredTasks = newTasks.filter(t => t.id != taskId)
         tasks[todolistId] = filteredTasks
         setTasks({...tasks})
-
-        //own method
-        //setTasks({...tasks, [todolistId]: tasks[todolistId].filter(f => f.id !== taskId)})
     }
     let changeTaskTitle = (id: string, newTitle: string, todolistId: string) => {
         debugger
@@ -42,26 +41,22 @@ export const useTasks = () => {
         }
     }
     let addTask = (todolistId: string, title: string) => {
-        let task = {id: v1(), title: title, isDone: false}
+        let task = {
+            id: v1(), title: 'HTML', status: TaskStatuses.Completed, todoListId: todolistId1,
+            description: '', startDate: '', deadline: '', addedDate: '', order: 0, priority: TaskPriorities.Low
+        }
         let tasks2 = tasks[todolistId]
         let newTasks = [task, ...tasks2]
         tasks[todolistId] = newTasks
         setTasks({...tasks})
-
-        //own method
-        // let newTask = {id: v1(), title: title, isDone: false}
-        // setTasks({...tasks, [todolistId]: [newTask, ...tasks[todolistId]]})
     }
-    let changeStatus = (todolistId: string, taskId: string, isDone: boolean) => {
+    let changeStatus = (todolistId: string, taskId: string, status: TaskStatuses) => {
         let tasks2 = tasks[todolistId]
         let task = tasks2.find(t => t.id === taskId)
         if (task) {
-            task.isDone = isDone
+            task.status = TaskStatuses.Completed
             setTasks({...tasks})
         }
-
-        //own method
-        //setTasks({...tasks,[todolistId]: tasks[todolistId].map(t => t.id === id ? {...t, isDone: isDone}: t)})
     }
 
     let completelyRemoveTasksForTodolist = (todolistsId: string) => {
@@ -73,6 +68,8 @@ export const useTasks = () => {
     }
 
 
-    return {tasks, removeTask, changeTaskTitle, addTask, changeStatus,
-        completelyRemoveTasksForTodolist, addStateForNewTodolist}
+    return {
+        tasks, removeTask, changeTaskTitle, addTask, changeStatus,
+        completelyRemoveTasksForTodolist, addStateForNewTodolist
+    }
 }
