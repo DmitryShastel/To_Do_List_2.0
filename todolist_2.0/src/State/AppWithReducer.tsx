@@ -8,7 +8,7 @@ import {
     removeTodolistAC,
     todolistsReducer
 } from "./todolists-reducer";
-import {addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTaskAC, tasksReducer} from "./tasks-reducer";
+import {addTaskAC, removeTaskAC, tasksReducer, updateTaskAC} from "./tasks-reducer";
 import {Todolist} from "../Tdolist";
 import {AppBar, Button, Container, Grid, IconButton, Paper, Toolbar, Typography} from '@mui/material';
 import {Menu} from "@mui/icons-material";
@@ -66,18 +66,29 @@ export const AppWithReducer = () => {
 
 
     let changeTaskTitle = (taskId: string, title: string, todolistId: string) => {
-        dispatchToTasks(changeTaskTitleAC(taskId, title, todolistId));
+        dispatchToTasks(updateTaskAC(taskId, {title: title}, todolistId));
     };
     let removeTask = (todolistId: string, taskId: string) => {
         const action = removeTaskAC(todolistId, taskId)
         dispatchToTasks(action)
     }
-    let addTask = (todolistId: string, title: string) => {
-        const action = addTaskAC(todolistId, title)
-        dispatchToTasks(action)
+    let addTask = (todolistId: string, taskTitle: string) => {
+        const action = {
+            todoListId: todolistId,
+            id: 'is exist',
+            status: TaskStatuses.New,
+            addedDate: '',
+            order: 0,
+            priority: 0,
+            deadline: '',
+            title: taskTitle,
+            description: '',
+            startDate: ''
+        }
+        dispatchToTasks(addTaskAC(action))
     }
-    let changeStatus = (todolistId: string, taskId: string, status: TaskStatuses) => {
-        const action = changeTaskStatusAC(todolistId, taskId, status)
+    let changeStatus = (taskId: string, status: TaskStatuses, todolistId: string) => {
+        const action = updateTaskAC(taskId, {status}, todolistId)
         dispatchToTasks(action)
     }
     let removeTodolist = (todolistsId: string) => {
@@ -86,7 +97,12 @@ export const AppWithReducer = () => {
         dispatchToTasks(action)
     }
     let addTodolist = (title: string) => {
-        const action = addTodolistAC(title)
+        const action = addTodolistAC({
+            id: v1(),
+            title: title,
+            order: 0,
+            addedDate: ''
+        })
         dispatchToDolist(action)
         dispatchToTasks(action)
     }

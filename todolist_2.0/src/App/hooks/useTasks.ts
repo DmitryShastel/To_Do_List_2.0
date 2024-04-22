@@ -50,7 +50,7 @@ export const useTasks = () => {
         tasks[todolistId] = newTasks
         setTasks({...tasks})
     }
-    let changeStatus = (todolistId: string, taskId: string, status: TaskStatuses) => {
+    let changeStatus = (taskId: string, status: TaskStatuses, todolistId: string) => {
         let tasks2 = tasks[todolistId]
         let task = tasks2.find(t => t.id === taskId)
         if (task) {
