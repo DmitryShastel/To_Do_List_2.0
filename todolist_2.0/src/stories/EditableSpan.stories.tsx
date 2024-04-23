@@ -1,7 +1,7 @@
 import React from 'react';
-import {AddItemForm} from "../AddItemForm/AddItemForm";
+import {AddItemForm} from "../components/AddItemForm";
 import {action} from "@storybook/addon-actions";
-import {EditableSpan} from "../EditableSpan";
+import {EditableSpan} from "../components/EditableSpan";
 
 
 export default {

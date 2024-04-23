@@ -1,15 +1,15 @@
 import React, {useCallback, useEffect} from "react";
-import {EditableSpan} from "./EditableSpan";
-import {FilterType} from "./State/AppWithReducer";
+import {EditableSpan} from "../../../components/EditableSpan";
 import {Button, IconButton} from "@mui/material";
 import {Delete} from "@mui/icons-material";
-import {AddItemForm} from "./AddItemForm/AddItemForm";
-import {Task} from "./State/Task";
-import {TaskStatuses, TaskType} from "./api/todolists-api";
+import {AddItemForm} from "../../../components/AddItemForm";
+import {Task} from "./Task/Task";
+import {TaskStatuses, TaskType} from "../../../api/todolists-api";
 import {ThunkDispatch} from "redux-thunk";
 import {AnyAction} from "redux";
 import {useDispatch} from "react-redux";
-import {fetchTaskTC} from "./State/tasks-reducer";
+import {fetchTaskTC} from "../../../State/tasks-reducer";
+import {FilterType} from "../../../State/todolists-reducer";
 
 
 

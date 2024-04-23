@@ -1,17 +1,19 @@
 import axios from "axios";
 
-
 const settings = {
     withCredentials: true,
     headers: {
         'API-KEY': '9f9da7ee-2def-4ec9-bde3-f37a343d34bd'
     }
 }
-
 const instance = axios.create({
     baseURL: 'https://social-network.samuraijs.com/api/1.1/',
     ...settings
 })
+
+export type TasksType = {
+    [key: string]: TaskType[]
+}
 
 export enum TaskStatuses {
     New,
@@ -19,7 +21,6 @@ export enum TaskStatuses {
     Completed,
     Draft
 }
-
 export enum TaskPriorities {
     Low,
     Middle,
@@ -27,7 +28,6 @@ export enum TaskPriorities {
     Urgently,
     Later
 }
-
 
 export type TodolistType = {
     id: string

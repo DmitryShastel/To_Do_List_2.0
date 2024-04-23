@@ -169,8 +169,6 @@ export const UpdateTaskTitle = () => {
         status: status
     }
 
-
-
     const updateTask = () => {
         todolistsAPI.updateTask(taskId, task, todolistId).then(res => {
             setState(res.data)

@@ -9,7 +9,7 @@ import {
     todolistsReducer
 } from './todolists-reducer';
 import {v1} from 'uuid';
-import {addTaskAC, updateTaskAC, changeTaskTitleAC, removeTaskAC, setTaskAC, tasksReducer} from "./tasks-reducer";
+import {addTaskAC, removeTaskAC, setTaskAC, tasksReducer, updateTaskAC} from "./tasks-reducer";
 import {TaskPriorities, TaskStatuses, TaskType, TodolistType} from "../api/todolists-api";
 
 

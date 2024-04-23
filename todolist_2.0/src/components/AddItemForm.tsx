@@ -1,7 +1,7 @@
 import React from 'react';
 import {IconButton, TextField} from "@mui/material";
 import {ControlPoint} from "@mui/icons-material";
-import {useAddItemForm} from "./hooks/useAddItemForm";
+import {useAddItemForm} from "./useAddItemForm";
 
 export type AddFormPropsType = {
     addItem: (title: string) => void

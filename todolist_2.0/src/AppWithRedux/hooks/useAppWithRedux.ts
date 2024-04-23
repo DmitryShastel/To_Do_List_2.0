@@ -10,8 +10,7 @@ import {
     removeTodolistAC,
     TodolistDamainType
 } from "../../State/todolists-reducer";
-import {TasksType} from "../AppWithRedux";
-import {TaskStatuses} from "../../api/todolists-api";
+import {TaskStatuses, TasksType} from "../../api/todolists-api";
 import {v1} from "uuid";
 import {ThunkDispatch} from "redux-thunk";
 import {AnyAction} from "redux";
@@ -23,7 +22,7 @@ export const useAppWithRedux = () => {
     const dispatch: ThunkDispatch<any, any, AnyAction> = useDispatch()
 
     let changeTaskTitle = useCallback((taskId: string, title: string, todolistId: string) => {
-        dispatch(updateTaskTC(taskId,{title: title}, todolistId));
+        dispatch(updateTaskTC(taskId, {title: title}, todolistId));
     }, []);
     let changeStatus = useCallback((taskId: string, status: TaskStatuses, todolistId: string) => {
         dispatch(updateTaskTC(taskId, {status}, todolistId))
@@ -47,7 +46,6 @@ export const useAppWithRedux = () => {
         }
         dispatch(addTaskAC(action))
     }, []);
-
 
 
     let removeTodolist = useCallback((todolistsId: string) => {
