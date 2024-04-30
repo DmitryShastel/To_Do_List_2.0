@@ -8,7 +8,11 @@ import {AppRootStateType} from "../State/store";
 import {RequestStatusType} from "../State/app-reduser";
 
 
-export const AppWithRedux = () => {
+type AppWithReduxType = {
+    demo?: boolean
+}
+
+export const AppWithRedux = ({demo = false}: AppWithReduxType) => {
 
     const status = useSelector<AppRootStateType, RequestStatusType>((state) => state.app.status)
 
@@ -28,7 +32,7 @@ export const AppWithRedux = () => {
                 {status === 'loading' && <LinearProgress/>}
             </AppBar>
             <Container fixed>
-                <TodolistList/>
+                <TodolistList demo={demo}/>
             </Container>
         </div>
     );

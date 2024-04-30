@@ -10,6 +10,6 @@ export default {
 }
 
 
-export const AddItemFormBaseExample = () => {
-    return <AppWithRedux/>
+export const AddItemFormBaseExample = (props: any) => {
+    return <AppWithRedux demo={true}/>
 }

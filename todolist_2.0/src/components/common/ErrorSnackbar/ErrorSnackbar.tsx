@@ -5,7 +5,7 @@ import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../../State/store";
-import {setErrorAC} from "../../../State/app-reduser";
+import {setAppErrorAC} from "../../../State/app-reduser";
 
 export function ErrorSnackbar() {
     //const [open, setOpen] = React.useState(false);
@@ -21,7 +21,7 @@ export function ErrorSnackbar() {
         if (reason === 'clickaway') {
             return;
         }
-        dispatch(setErrorAC(null))
+        dispatch(setAppErrorAC(null))
         //setOpen(false);
     };
 

@@ -58,16 +58,17 @@ export const App = () => {
                                 <Grid item>
                                     <Paper style={{padding: '10px'}}>
                                         <Todolist
-                                            id={tl.id}
+                                            todolist={tl}
+                                            //id={tl.id}
                                             key={tl.id}
-                                            todolistId={tl.id}
-                                            title={tl.title}
+                                            //todolistId={tl.id}
+                                           //title={tl.title}
                                             tasks={tasksForTodolist}
                                             removeTask={removeTask}
                                             changeFilter={changeFilter}
                                             addTask={addTask}
                                             changeStatus={changeStatus}
-                                            filter={tl.filter}
+                                            //filter={tl.filter}
                                             removeTodolist={removeTodolist}
                                             changeTodolistTitle={changeTodolistTitle}
                                             changeTaskTitle={changeTaskTitle}

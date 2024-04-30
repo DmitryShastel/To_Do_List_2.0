@@ -13,3 +13,7 @@ const callback = action('Item is added')
 export const AddItemFormBaseExample = () => {
     return <AddItemForm addItem={callback}/>
 }
+
+export const AddItemFormBaseDisabledExample = () => {
+    return <AddItemForm disabled={true} addItem={callback}/>
+}

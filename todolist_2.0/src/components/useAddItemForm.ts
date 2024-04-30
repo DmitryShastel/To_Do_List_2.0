@@ -5,7 +5,7 @@ export const useAddItemForm = (onItemAdded: (title: string) => void) => {
     let [error, setError] = useState<string | null>(null)
 
 
-    const addItem = () => {
+    const addItemHandler = () => {
         if (title.trim() !== '') {
             onItemAdded(title);
             setTitle('')
@@ -23,8 +23,8 @@ export const useAddItemForm = (onItemAdded: (title: string) => void) => {
             setError(null)
         }
         if (e.keyCode === 13) {
-            addItem()
+            addItemHandler()
         }
     }
-    return {title, onKeyPressHandler, onChangeHandler, error, addItem}
+    return {title, onKeyPressHandler, onChangeHandler, error, addItemHandler}
 };
