@@ -83,5 +83,3 @@ test('correct status of todolist should be changed', () => {
     expect(endState[0].entityStatus).toBe("idle");
     expect(endState[1].entityStatus).toBe(newStatus);
 });
-
-

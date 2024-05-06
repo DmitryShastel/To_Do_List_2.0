@@ -1,6 +1,6 @@
 import {todolistsAPI, TodolistType} from "../api/todolists-api";
 import {Dispatch} from "redux";
-import {RequestStatusType, setAppStatusAC, SetStatusActionType} from "./app-reduser";
+import {RequestStatusType, setAppStatusAC, SetAppStatusActionType} from "./app-reduser";
 
 
 export type AddTodolistActionType = ReturnType<typeof addTodolistAC>
@@ -25,7 +25,7 @@ export type TodolistDamainType = TodolistType & {
     entityStatus: RequestStatusType
 }
 
-type ThunkDispatch = Dispatch<ActionsType | SetStatusActionType>
+type ThunkTodolistDispatch = Dispatch<ActionsType | SetAppStatusActionType>
 
 export const todolistsReducer = (state: TodolistDamainType[] = InitialState, action: ActionsType): TodolistDamainType[] => {
     switch (action.type) {
@@ -66,7 +66,7 @@ export const changeTodolistEntityStatusAC = (id: string, status: RequestStatusTy
 export const setTodolistsAc = (todolists: Array<TodolistType>) => ({type: 'SET-TODOLISTS', todolists} as const)
 
 //thunks
-export const fetchTodolistsTC = () => (dispatch: ThunkDispatch) => {
+export const fetchTodolistsTC = () => (dispatch: ThunkTodolistDispatch) => {
     dispatch(setAppStatusAC('loading'))
     todolistsAPI.getTodolists()
         .then((res) => {
@@ -74,7 +74,7 @@ export const fetchTodolistsTC = () => (dispatch: ThunkDispatch) => {
             dispatch(setAppStatusAC('succeeded'))
         })
 }
-export const removeTodolistTC = (todolistId: string) => (dispatch: ThunkDispatch) => {
+export const removeTodolistTC = (todolistId: string) => (dispatch: ThunkTodolistDispatch) => {
     dispatch(setAppStatusAC('loading'))
     dispatch(changeTodolistEntityStatusAC(todolistId ,'loading'))
     todolistsAPI.deleteTodolist(todolistId)
@@ -83,7 +83,7 @@ export const removeTodolistTC = (todolistId: string) => (dispatch: ThunkDispatch
             dispatch(setAppStatusAC('succeeded'))
         })
 }
-export const addTodolistTC = (title: string) => (dispatch: ThunkDispatch) => {
+export const addTodolistTC = (title: string) => (dispatch: ThunkTodolistDispatch) => {
     dispatch(setAppStatusAC('loading'))
     todolistsAPI.createTodolist(title)
         .then(res => {

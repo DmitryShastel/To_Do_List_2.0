@@ -10,11 +10,12 @@ const initialState: InitialStateType = {
     error: null
 }
 
-export type SetErrorActionType = ReturnType<typeof setAppErrorAC>
-export type SetStatusActionType = ReturnType<typeof setAppStatusAC>
+
+export type SetAppErrorActionType = ReturnType<typeof setAppErrorAC>
+export type SetAppStatusActionType = ReturnType<typeof setAppStatusAC>
 type ActionsType =
-    | SetErrorActionType
-    | SetStatusActionType
+    | SetAppErrorActionType
+    | SetAppStatusActionType
 
 
 export const appReducer = (state: InitialStateType = initialState, action: ActionsType): InitialStateType => {
