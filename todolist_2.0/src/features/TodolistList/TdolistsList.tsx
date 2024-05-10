@@ -17,10 +17,10 @@ import {TaskStatuses, TasksType} from "../../api/todolists-api";
 import {Grid, Paper} from "@mui/material";
 import {AddItemForm} from "../../components/AddItemForm";
 import {Todolist} from "./Todolist/Tdolist";
+import {Navigate} from "react-router-dom";
 
 
 type TodolistPropsType = {
-    // todolist: TodolistDamainType[]
     demo?: boolean
 }
 
@@ -29,9 +29,11 @@ export const TodolistList: React.FC<TodolistPropsType> = ({demo = false, ...prop
     const dispatch: ThunkDispatch<any, any, AnyAction> = useDispatch();
     const todolists = useSelector<AppRootStateType, Array<TodolistDamainType>>(state => state.todolists)
     const tasks = useSelector<AppRootStateType, TasksType>(state => state.tasks)
+    const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.auth.isLoggedIn)
+
 
     useEffect(() => {
-        if (demo) {
+        if (demo || !isLoggedIn) {
             return
         }
         dispatch(fetchTodolistsTC())
@@ -65,6 +67,10 @@ export const TodolistList: React.FC<TodolistPropsType> = ({demo = false, ...prop
         dispatch(updateTaskTC(taskId, {title: taskTitle}, todolistId))
     }, [])
 
+    if (!isLoggedIn) {
+        return <Navigate to={'/login'}/>
+    }
+
     return (
         <>
             <Grid container style={{padding: '10px'}}>
@@ -74,22 +80,17 @@ export const TodolistList: React.FC<TodolistPropsType> = ({demo = false, ...prop
                 {
                     todolists.map((tl) => {
                         let tasksForTodolist = tasks[tl.id]
-
                         return (
                             <Grid item>
                                 <Paper style={{padding: '10px'}}>
                                     <Todolist
                                         todolist={tl}
-                                        // id={tl.id}
                                         key={tl.id}
-                                        //todolistId={tl.id}
-                                        //title={tl.title}
                                         tasks={tasksForTodolist}
                                         removeTask={removeTask}
                                         changeFilter={changeToDoListFilter}
                                         addTask={addTask}
                                         changeStatus={changeTaskStatus}
-                                        //filter={tl.filter}
                                         removeTodolist={removeTodolist}
                                         changeTodolistTitle={changeToDoListTitle}
                                         changeTaskTitle={changeTaskTitle}
