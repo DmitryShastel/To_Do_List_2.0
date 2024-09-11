@@ -58,6 +58,7 @@ export const Todolist = React.memo(({demo = false, ...props}: PropsType) => {
 
     let tasksForTodolist = props.tasks
 
+
     if (props.todolist.filter === 'completed') {
         tasksForTodolist = props.tasks.filter(t => t.status === TaskStatuses.Completed)
     }
@@ -77,7 +78,7 @@ export const Todolist = React.memo(({demo = false, ...props}: PropsType) => {
             </div>
             <div>
                 {
-                    tasksForTodolist.map(t =>
+                     tasksForTodolist.map(t =>
                         <Task
                             task={t}
                             changeStatus={props.changeStatus}

@@ -61,7 +61,7 @@ export const AppWithRedux = ({demo = false}: AppWithReduxType) => {
                         <IconButton edge='start' color='inherit' aria-label='menu'>
                             <Menu/>
                         </IconButton>
-                        <Typography variant='h6'>
+                        <Typography variant='h6' style={{ flexGrow: 1 }}>
                             News
                         </Typography>
                         {isLoggedIn && <Button color='inherit' onClick={logoutHandler}>Log out</Button>}

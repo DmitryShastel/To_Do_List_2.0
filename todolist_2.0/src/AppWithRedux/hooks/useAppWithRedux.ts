@@ -28,13 +28,14 @@ export const useAppWithRedux = () => {
         dispatch(updateTaskTC(taskId, {status}, todolistId))
     }, []);
     let removeTask = useCallback((todolistId: string, taskId: string) => {
-        dispatch(removeTaskAC(todolistId, taskId))
+        dispatch(removeTaskAC({todolistId, taskId}))
     }, []);
     let addTask = useCallback((todolistId: string, taskTitle: string) => {
 
-        const action = {
+        const action =
+            {
             todoListId: todolistId,
-            id: 'is exist',
+            id: v1(),
             status: TaskStatuses.New,
             addedDate: '',
             order: 0,
@@ -44,26 +45,31 @@ export const useAppWithRedux = () => {
             description: '',
             startDate: ''
         }
+        //@ts-ignore
         dispatch(addTaskAC(action))
     }, []);
 
 
     let removeTodolist = useCallback((todolistsId: string) => {
-        dispatch(removeTodolistAC(todolistsId))
+        dispatch(removeTodolistAC({id: todolistsId}))
     }, []);
+
     let addTodolist = useCallback((title: string) => {
         dispatch(addTodolistAC({
-            id: v1(),
-            title: title,
-            order: 0,
-            addedDate: ''
+            todolist: {
+                id: v1(),
+                title: title,
+                order: 0,
+                addedDate: ''
+            }
         }))
     }, []);
+
     let changeTodolistTitle = useCallback((todolistsId: string, newTitle: string) => {
-        dispatch(changeTodolistTitleAC(todolistsId, newTitle))
+        dispatch(changeTodolistTitleAC({id: todolistsId, title: newTitle}))
     }, []);
     let changeFilter = useCallback((todolistId: string, value: FilterType) => {
-        dispatch(changeTodolistFilterAC(todolistId, value))
+        dispatch(changeTodolistFilterAC({id: todolistId, filter: value}))
     }, []);
 
 
@@ -79,6 +85,4 @@ export const useAppWithRedux = () => {
         changeTodolistTitle,
         changeFilter
     }
-
 };
-
