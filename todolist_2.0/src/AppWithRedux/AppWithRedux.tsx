@@ -12,14 +12,16 @@ import {
 import {Menu} from "@mui/icons-material";
 import {TodolistList} from "../features/TodolistList/TdolistsList";
 import {ErrorSnackbar} from "../components/common/ErrorSnackbar/ErrorSnackbar";
-import {useDispatch, useSelector} from "react-redux";
-import {AppRootStateType} from "../State/store";
-import {initializeAppTC, RequestStatusType} from "../State/app-reduser";
+import {useDispatch} from "react-redux";
+import {useAppSelector} from "../State/store";
+import {initializeAppTC} from "../State/app-reduser";
 import {Login} from "../features/Login/Login";
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import {ThunkDispatch} from "redux-thunk";
 import {AnyAction} from "redux";
 import {logautTC} from "../State/auth-reducer";
+import {selectIsInitialized, selectStatus} from "../App/hooks/use.app.selector";
+import {selectIsLoggedIn} from "../features/Login/use.login.selector";
 
 
 type AppWithReduxType = {
@@ -29,9 +31,10 @@ type AppWithReduxType = {
 export const AppWithRedux = ({demo = false}: AppWithReduxType) => {
 
     const dispatch: ThunkDispatch<any, any, AnyAction> = useDispatch();
-    const status = useSelector<AppRootStateType, RequestStatusType>((state) => state.app.status)
-    const isInitialized = useSelector<AppRootStateType, boolean>((state) => state.app.isInitialized)
-    const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.auth.isLoggedIn)
+    const status  = useAppSelector(selectStatus)
+    const isInitialized  = useAppSelector(selectIsInitialized)
+    const isLoggedIn = useAppSelector(selectIsLoggedIn)
+
 
 
     useEffect(() => {

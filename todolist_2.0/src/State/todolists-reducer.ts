@@ -3,6 +3,7 @@ import {Dispatch} from "redux";
 import {RequestStatusType, setAppStatusAC} from "./app-reduser";
 import {handleServerNetworkError} from "../utils/error-utils";
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
+import {fetchTaskTC} from "./tasks-reducer";
 
 
 export type FilterType = 'all' | 'active' | 'completed'
@@ -41,6 +42,9 @@ const slice = createSlice({
         },
         setTodolistsAc(state, action: PayloadAction<{ todolists: Array<TodolistType> }>) {
             return action.payload.todolists.map(tl => ({...tl, filter: "all", entityStatus: 'idle'}))
+        },
+        clearDataTodoAC (state, action: PayloadAction){
+            return  []
         }
     }
 })
@@ -52,7 +56,8 @@ export const {
     removeTodolistAC,
     addTodolistAC,
     changeTodolistTitleAC,
-    changeTodolistFilterAC
+    changeTodolistFilterAC,
+    clearDataTodoAC
 } = slice.actions
 
 //thunks
@@ -62,6 +67,13 @@ export const fetchTodolistsTC = () => (dispatch: Dispatch) => {
         .then((res) => {
             dispatch(setTodolistsAc({todolists: res.data}))
             dispatch(setAppStatusAC({status: 'succeeded'}))
+            return res.data
+        })
+        .then((todos) => {
+            todos.forEach((tl) => {
+                //@ts-ignore
+                dispatch(fetchTaskTC(tl.id))
+            })
         })
         .catch(error => {
             handleServerNetworkError(error, dispatch)

@@ -11,18 +11,19 @@ import {
     Typography
 } from '@mui/material'
 import {useFormik} from "formik";
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import {loginTC} from "../../State/auth-reducer";
 import {ThunkDispatch} from "redux-thunk";
 import {AnyAction} from "redux";
-import {AppRootStateType} from "../../State/store";
 import {Navigate} from "react-router-dom";
+import {selectIsLoggedIn} from "./use.login.selector";
+import {useAppSelector} from "../../State/store";
 
 
 export const Login = () => {
 
     const dispatch: ThunkDispatch<any, any, AnyAction> = useDispatch()
-    const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.auth.isLoggedIn)
+    const isLoggedIn = useAppSelector(selectIsLoggedIn)
 
     const formik = useFormik({
         validate: (values) => {

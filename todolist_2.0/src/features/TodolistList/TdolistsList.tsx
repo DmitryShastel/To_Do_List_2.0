@@ -1,23 +1,25 @@
 import React, {useCallback, useEffect} from "react";
 import {ThunkDispatch} from "redux-thunk";
 import {AnyAction} from "redux";
-import {useDispatch, useSelector} from "react-redux";
-import {AppRootStateType} from "../../State/store";
+import {useDispatch} from "react-redux";
 import {
     addTodolistTC,
     changeTodolistFilterAC,
     changeTodolistTitleTC,
     fetchTodolistsTC,
     FilterType,
-    removeTodolistTC,
-    TodolistDamainType
+    removeTodolistTC
 } from "../../State/todolists-reducer";
 import {addTaskTC, removeTaskTC, updateTaskTC} from "../../State/tasks-reducer";
-import {TaskStatuses, TasksType} from "../../api/todolists-api";
+import {TaskStatuses} from "../../api/todolists-api";
 import {Grid, Paper} from "@mui/material";
 import {AddItemForm} from "../../components/AddItemForm";
 import {Todolist} from "./Todolist/Tdolist";
 import {Navigate} from "react-router-dom";
+import {selectTodolists} from "./use.todo.selector";
+import {selectIsLoggedIn} from "../Login/use.login.selector";
+import {selectTasks} from "./Todolist/Task/use.task.selector";
+import {useAppSelector} from "../../State/store";
 
 
 type TodolistPropsType = {
@@ -27,9 +29,10 @@ type TodolistPropsType = {
 export const TodolistList: React.FC<TodolistPropsType> = ({demo = false, ...props}) => {
 
     const dispatch: ThunkDispatch<any, any, AnyAction> = useDispatch();
-    const todolists = useSelector<AppRootStateType, Array<TodolistDamainType>>(state => state.todolists)
-    const tasks = useSelector<AppRootStateType, TasksType>(state => state.tasks)
-    const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.auth.isLoggedIn)
+
+    const todolists = useAppSelector(selectTodolists)
+    const isLoggedIn = useAppSelector(selectIsLoggedIn)
+    const tasks = useAppSelector(selectTasks)
 
 
     useEffect(() => {
@@ -50,7 +53,7 @@ export const TodolistList: React.FC<TodolistPropsType> = ({demo = false, ...prop
         dispatch(changeTodolistTitleTC(todolistId, titleTodolist))
     }, [])
     const changeToDoListFilter = useCallback((todolistId: string, filter: FilterType) => {
-        dispatch(changeTodolistFilterAC({id:todolistId, filter: filter}))
+        dispatch(changeTodolistFilterAC({id: todolistId, filter: filter}))
     }, [])
 
 //taskFuns

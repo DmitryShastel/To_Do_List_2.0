@@ -3,6 +3,8 @@ import {Dispatch} from "redux";
 import {setAppStatusAC} from "./app-reduser";
 import {handleServerAppError, handleServerNetworkError} from "../utils/error-utils";
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
+import {clearDataTodoAC} from "./todolists-reducer";
+import {clearDataTaskAC} from "./tasks-reducer";
 
 
 const initialState = {
@@ -47,6 +49,8 @@ export const logautTC = () => (dispatch: Dispatch) => {
             if (res.data.resultCode === 0) {
                 dispatch(setIsLoggedInAC({value: false}))
                 dispatch(setAppStatusAC({status: 'succeeded'}))
+                dispatch(clearDataTodoAC())
+                dispatch(clearDataTaskAC())
             } else {
                 handleServerAppError(res.data, dispatch)
             }

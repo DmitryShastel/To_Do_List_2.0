@@ -5,6 +5,7 @@ import {appReducer} from "./app-reduser";
 import {authReducer} from "./auth-reducer";
 import {configureStore} from "@reduxjs/toolkit";
 import {todolistsReducer} from "./todolists-reducer";
+import {TypedUseSelectorHook, useSelector} from "react-redux";
 
 
 const rootReducer = combineReducers({
@@ -21,7 +22,7 @@ export const store = configureStore({
     middleware: getDefaultMiddleware => getDefaultMiddleware().prepend(thunkMiddleware)
 })
 
-
+export const useAppSelector: TypedUseSelectorHook<AppRootStateType> = useSelector
 export type AppRootStateType = ReturnType<typeof rootReducer>
 
 //@ts-ignore
