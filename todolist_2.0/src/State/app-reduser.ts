@@ -1,5 +1,5 @@
 import {Dispatch} from "redux";
-import {authAPI} from "../api/todolists-api";
+import {authAPI} from "../common/api/todolists-api";
 import {setIsLoggedInAC} from "./auth-reducer";
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 
@@ -27,6 +27,7 @@ const slice = createSlice({
 })
 
 export const appReducer = slice.reducer
+export const appActions = slice.actions;
 export const {setAppStatusAC, setAppErrorAC, setIsInitializedAC} = slice.actions
 
 export type RequestStatusType = 'idle' | 'loading' | 'succeeded' | 'failed'

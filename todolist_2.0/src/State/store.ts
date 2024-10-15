@@ -1,6 +1,6 @@
-import {combineReducers} from "redux";
+import {AnyAction, combineReducers} from "redux";
 import {tasksReducer} from "./tasks-reducer";
-import {thunk as thunkMiddleware} from 'redux-thunk'
+import {thunk as thunkMiddleware, ThunkDispatch} from 'redux-thunk'
 import {appReducer} from "./app-reduser";
 import {authReducer} from "./auth-reducer";
 import {configureStore} from "@reduxjs/toolkit";
@@ -24,6 +24,7 @@ export const store = configureStore({
 
 export const useAppSelector: TypedUseSelectorHook<AppRootStateType> = useSelector
 export type AppRootStateType = ReturnType<typeof rootReducer>
+export type AppDispatch = ThunkDispatch<AppRootStateType, unknown, AnyAction>;
 
 //@ts-ignore
 window.store = store

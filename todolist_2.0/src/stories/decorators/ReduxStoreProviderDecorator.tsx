@@ -5,7 +5,7 @@ import {applyMiddleware, combineReducers, createStore} from "redux";
 import {tasksReducer} from "../../State/tasks-reducer";
 import {todolistsReducer} from "../../State/todolists-reducer";
 import {v1} from "uuid";
-import {TaskPriorities, TaskStatuses} from "../../api/todolists-api";
+import {TaskPriorities, TaskStatuses} from "../../common/api/todolists-api";
 import {appReducer} from "../../State/app-reduser";
 import {thunk as thunkMiddleware} from 'redux-thunk'
 import {authReducer} from "../../State/auth-reducer";

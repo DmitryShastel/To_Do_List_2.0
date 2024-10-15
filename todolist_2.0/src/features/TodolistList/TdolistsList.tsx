@@ -3,15 +3,13 @@ import {ThunkDispatch} from "redux-thunk";
 import {AnyAction} from "redux";
 import {useDispatch} from "react-redux";
 import {
-    addTodolistTC,
-    changeTodolistFilterAC,
-    changeTodolistTitleTC,
-    fetchTodolistsTC,
-    FilterType,
-    removeTodolistTC
+    addTodolist,
+    changeTodolistFilterAC, changeTodolistTitle,
+    fetchTodolists,
+    FilterType, removeTodolist,
 } from "../../State/todolists-reducer";
-import {addTaskTC, removeTaskTC, updateTaskTC} from "../../State/tasks-reducer";
-import {TaskStatuses} from "../../api/todolists-api";
+import {addTask, removeTask, updateTask} from "../../State/tasks-reducer";
+import {TaskStatuses} from "../../common/api/todolists-api";
 import {Grid, Paper} from "@mui/material";
 import {AddItemForm} from "../../components/AddItemForm";
 import {Todolist} from "./Todolist/Tdolist";
@@ -39,35 +37,37 @@ export const TodolistList: React.FC<TodolistPropsType> = ({demo = false, ...prop
         if (demo || !isLoggedIn) {
             return
         }
-        dispatch(fetchTodolistsTC())
+        dispatch(fetchTodolists())
     }, [])
 
 //todolistFuns
-    const addTodolist = useCallback((titleTodolist: string) => {
-        dispatch(addTodolistTC(titleTodolist))
+    const addTodolistCallback = useCallback((titleTodolist: string) => {
+        dispatch(addTodolist(titleTodolist))
     }, [])
-    const removeTodolist = useCallback((todolistId: string) => {
-        dispatch(removeTodolistTC(todolistId))
+    const removeTodolistCallback = useCallback((todolistId: string) => {
+        dispatch(removeTodolist({todolistId}))
     }, [])
-    const changeToDoListTitle = useCallback((todolistId: string, titleTodolist: string) => {
-        dispatch(changeTodolistTitleTC(todolistId, titleTodolist))
+    const changeToDoListTitleCallback = useCallback((todolistId: string, newTitle: string) => {
+        dispatch(changeTodolistTitle({todolistId, newTitle}))
     }, [])
     const changeToDoListFilter = useCallback((todolistId: string, filter: FilterType) => {
         dispatch(changeTodolistFilterAC({id: todolistId, filter: filter}))
     }, [])
 
 //taskFuns
-    const addTask = useCallback((todolistId: string, taskTitle: string) => {
-        dispatch(addTaskTC(todolistId, taskTitle))
+    const addTaskCallback = useCallback((todolistId: string, title: string) => {
+        dispatch(addTask({ todolistId, title }))
+    }, [dispatch])
+    const removeTaskCallback = useCallback((todolistId: string, taskId: string) => {
+        dispatch(removeTask({todolistId, taskId}))
     }, [])
-    const removeTask = useCallback((todolistId: string, taskId: string) => {
-        dispatch(removeTaskTC(todolistId, taskId))
-    }, [])
+
     const changeTaskStatus = useCallback((taskId: string, status: TaskStatuses, todolistId: string) => {
-        dispatch(updateTaskTC(taskId, {status}, todolistId))
+        dispatch(updateTask({taskId, domainModel: {status}, todolistId}))
     }, [])
-    const changeTaskTitle = useCallback((taskId: string, taskTitle: string, todolistId: string) => {
-        dispatch(updateTaskTC(taskId, {title: taskTitle}, todolistId))
+
+    const changeTaskTitle = useCallback((taskId: string, title: string, todolistId: string) => {
+        dispatch(updateTask({taskId, domainModel: {title}, todolistId}))
     }, [])
 
     if (!isLoggedIn) {
@@ -77,7 +77,7 @@ export const TodolistList: React.FC<TodolistPropsType> = ({demo = false, ...prop
     return (
         <>
             <Grid container style={{padding: '10px'}}>
-                <AddItemForm addItem={addTodolist}/>
+                <AddItemForm addItem={addTodolistCallback}/>
             </Grid>
             <Grid container spacing={3}>
                 {
@@ -90,12 +90,12 @@ export const TodolistList: React.FC<TodolistPropsType> = ({demo = false, ...prop
                                         todolist={tl}
                                         key={tl.id}
                                         tasks={tasksForTodolist}
-                                        removeTask={removeTask}
+                                        removeTaskCallback={removeTaskCallback}
                                         changeFilter={changeToDoListFilter}
-                                        addTask={addTask}
+                                        addTaskCallback={addTaskCallback}
                                         changeStatus={changeTaskStatus}
-                                        removeTodolist={removeTodolist}
-                                        changeTodolistTitle={changeToDoListTitle}
+                                        removeTodolist={removeTodolistCallback}
+                                        changeTodolistTitle={changeToDoListTitleCallback}
                                         changeTaskTitle={changeTaskTitle}
                                         demo={demo}
                                     />

@@ -27,6 +27,11 @@ export enum TaskPriorities {
     Urgently,
     Later
 }
+export const ResultCode = {
+    success: 0,
+    error: 1,
+    captcha: 10
+} as const
 
 export type TodolistType = {
     id: string
@@ -70,6 +75,10 @@ export type LoginParamsType = {
     rememberMe: boolean
     captcha?: string
 }
+export type AddTaskArgs = {
+    title: string
+    todolistId: string
+}
 
 
 export const authAPI = {
@@ -100,13 +109,14 @@ export const todolistsAPI = {
         return instance.get<GetTasksResponse>(`todo-lists/${todolistId}/tasks`)
     },
     deleteTask(todolistId: string, taskId: string) {
+
         return instance.delete<ResponseType>(`todo-lists/${todolistId}/tasks/${taskId}`)
     },
-    createTask(todolistId: string, title: string) {
+    createTask(args: AddTaskArgs) {
+        const {todolistId, title} = args
         return instance.post<ResponseType<{ item: TaskType }>>(`todo-lists/${todolistId}/tasks`, { title })
     },
     updateTask(taskId: string, model: UpdateTaskModelType, todolistId: string) {
         return instance.put<ResponseType<{ item: TaskType }>>(`todo-lists/${todolistId}/tasks/${taskId}`, model)
     },
 }
-
