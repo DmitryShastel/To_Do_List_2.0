@@ -1,6 +1,3 @@
-import {Dispatch} from "redux";
-import {authAPI} from "../common/api/todolists-api";
-import {setIsLoggedInAC} from "./auth-reducer";
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 
 
@@ -40,12 +37,3 @@ export type  InitialStateType = {
 
 export type SetAppErrorActionType = ReturnType<typeof setAppErrorAC>
 export type SetAppStatusActionType = ReturnType<typeof setAppStatusAC>
-
-export const initializeAppTC = () => (dispatch: Dispatch) => {
-    authAPI.me().then(res => {
-        if (res.data.resultCode === 0) {
-            dispatch(setIsLoggedInAC({value: true}))
-        }
-        dispatch(setIsInitializedAC({isInitialized: true}))
-    })
-}

@@ -14,14 +14,13 @@ import {TodolistList} from "../features/TodolistList/TdolistsList";
 import {ErrorSnackbar} from "../components/common/ErrorSnackbar/ErrorSnackbar";
 import {useDispatch} from "react-redux";
 import {useAppSelector} from "../State/store";
-import {initializeAppTC} from "../State/app-reduser";
 import {Login} from "../features/Login/Login";
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import {ThunkDispatch} from "redux-thunk";
 import {AnyAction} from "redux";
-import {logautTC} from "../State/auth-reducer";
 import {selectIsInitialized, selectStatus} from "../App/hooks/use.app.selector";
 import {selectIsLoggedIn} from "../features/Login/use.login.selector";
+import {initializeApp, logout} from "../State/auth-reducer";
 
 
 type AppWithReduxType = {
@@ -38,12 +37,12 @@ export const AppWithRedux = ({demo = false}: AppWithReduxType) => {
 
 
     useEffect(() => {
-        dispatch(initializeAppTC())
+        dispatch(initializeApp())
     }, [])
 
 
     const logoutHandler = useCallback(() => {
-        dispatch(logautTC())
+        dispatch(logout())
     }, [])
 
     if (!isInitialized) {
