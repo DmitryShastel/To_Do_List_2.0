@@ -11,9 +11,11 @@ export default {
 const callback = action('Item is added')
 
 export const AddItemFormBaseExample = () => {
+    //@ts-ignore
     return <AddItemForm addItem={callback}/>
 }
 
 export const AddItemFormBaseDisabledExample = () => {
+    //@ts-ignore
     return <AddItemForm disabled={true} addItem={callback}/>
 }

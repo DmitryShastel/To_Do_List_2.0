@@ -1,19 +1,19 @@
 import {AnyAction} from "redux";
-import {tasksReducer} from "./tasks-reducer";
+import {tasksSlice} from "../features/TodolistList/model/tasksSlice";
 import {ThunkDispatch} from 'redux-thunk'
-import {appReducer} from "./app-reduser";
-import {authReducer} from "./auth-reducer";
+import {appReducer} from "./appSlice";
+import {authSlice} from "../features/auth/model/authSlice";
 import {configureStore} from "@reduxjs/toolkit";
-import {todolistsReducer} from "./todolists-reducer";
+import {todolistsSlice} from "../features/TodolistList/model/todolistsSlice";
 import {TypedUseSelectorHook, useSelector} from "react-redux";
 
 
 export const store = configureStore({
     reducer: {
-        tasks: tasksReducer,
-        todolists: todolistsReducer,
+        tasks: tasksSlice,
+        todolists: todolistsSlice,
         app: appReducer,
-        auth: authReducer
+        auth: authSlice
     }
 })
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import {action} from "@storybook/addon-actions";
-import {Task} from "../features/TodolistList/Todolist/Task/Task";
-import {TaskPriorities, TaskStatuses} from "../common/api/todolists-api";
+import {Task} from "../features/TodolistList/ui/Todolist/Tasks/Task/Task";
+import {TaskPriorities, TaskStatuses} from "../features/TodolistList/api/tasksApi.types";
 
 
 
@@ -18,10 +18,10 @@ export const TaskBaseExampleForIsDone = () => {
     return <Task
         task={{id: '1', title: 'HTML', status: TaskStatuses.Completed, todoListId: 'todolistId1',
             description: '', startDate: '', deadline: '', addedDate: '', order: 0, priority: TaskPriorities.Low}}
-        changeTaskTitle={changeTaskTitleCallback}
-        removeTask={removeTaskCallback}
+        //changeTaskTitle={changeTaskTitleCallback}
+        //removeTask={removeTaskCallback}
         todolistId={'todolistId1'}
-        changeStatus={changeStatusCallback}
+        //changeStatus={changeStatusCallback}
     />
 }
 
@@ -29,9 +29,9 @@ export const TaskBaseExampleForNoDone = () => {
     return <Task
         task={{id: '2', title: 'HTML', status: TaskStatuses.New, todoListId: 'todolistId1',
             description: '', startDate: '', deadline: '', addedDate: '', order: 0, priority: TaskPriorities.Low}}
-        changeTaskTitle={changeTaskTitleCallback}
-        removeTask={removeTaskCallback}
+        //changeTaskTitle={changeTaskTitleCallback}
+        //removeTask={removeTaskCallback}
         todolistId={'todolistId1'}
-        changeStatus={changeStatusCallback}
+        //changeStatus={changeStatusCallback}
     />
 }

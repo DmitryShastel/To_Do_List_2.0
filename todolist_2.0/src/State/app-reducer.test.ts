@@ -1,4 +1,4 @@
-import {appReducer, InitialStateType, setAppErrorAC, setAppStatusAC} from "./app-reduser";
+import {appReducer, InitialStateType, setAppErrorAC, setAppStatusAC} from "./appSlice";
 
 let startState: InitialStateType
 

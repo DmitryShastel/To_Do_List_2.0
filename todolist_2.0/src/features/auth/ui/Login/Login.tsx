@@ -10,52 +10,13 @@ import {
     TextField,
     Typography
 } from '@mui/material'
-import {useFormik} from "formik";
-import {useDispatch} from "react-redux";
-import {ThunkDispatch} from "redux-thunk";
-import {AnyAction} from "redux";
 import {Navigate} from "react-router-dom";
-import {selectIsLoggedIn} from "./use.login.selector";
-import {useAppSelector} from "../../State/store";
-import {authThunks} from "../../State/auth-reducer";
-import {BaseResponse} from "../../common/types/common.types";
+import {useLogin} from "../../lib/hooks";
 
 
 export const Login = () => {
 
-    const dispatch: ThunkDispatch<any, any, AnyAction> = useDispatch()
-    const isLoggedIn = useAppSelector(selectIsLoggedIn)
-
-    const formik = useFormik({
-        validate: (values) => {
-            if (!values.email) {
-                return {
-                    email: 'Email is required'
-                }
-            }
-            if (!values.password) {
-                return {
-                    password: 'Password is required'
-                }
-            }
-        },
-        initialValues: {
-            email: '',
-            password: '',
-            rememberMe: false,
-        },
-        onSubmit: (values, formikHelpers) => {
-            dispatch(authThunks.login(values))
-                .unwrap()
-                .catch((err: BaseResponse) => {
-                    if (err.fieldsErrors) {
-                        err.fieldsErrors?.forEach((el) => {
-                            formikHelpers.setFieldError(el.field, el.error)
-                        })
-                    }
-                })
-        },
-    });
+    const {formik, isLoggedIn} = useLogin()
 
     if (isLoggedIn) {
         return <Navigate to={'/'}/>
@@ -70,7 +31,7 @@ export const Login = () => {
                         <FormLabel>
                             <Typography>
                                 To log in get registered{' '}
-                                <a href="https://social-network.samuraijs.com/" target="_blank"
+                                <a href="src/features/auth/ui/Login/Login" target="_blank"
                                    rel="noopener noreferrer">
                                     here
                                 </a>

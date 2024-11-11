@@ -7,7 +7,7 @@ export {}
 //     changeTodolistFilterAC, changeTodolistEntityStatusAC,
 //     changeTodolistTitleAC, FilterType,
 //     removeTodolistAC, setTodolistsAc, TodolistDamainType,
-//     todolistsReducer
+//     todolistsSlice
 // } from './todolists-reducer';
 // import {v1} from 'uuid';
 // import {TodolistType} from "../api/todolists-api";
@@ -29,7 +29,7 @@ export {}
 //
 // test('correct todolist should be removed', () => {
 //
-//     const endState = todolistsReducer(startState, removeTodolistAC(todolistId1))
+//     const endState = todolistsSlice(startState, removeTodolistAC(todolistId1))
 //
 //     expect(endState.length).toBe(1);
 //     expect(endState[0].id).toBe(todolistId2);
@@ -44,7 +44,7 @@ export {}
 //         order: 0
 //     };
 //
-//     const endState = todolistsReducer(startState, addTodolistAC(newTodolist))
+//     const endState = todolistsSlice(startState, addTodolistAC(newTodolist))
 //
 //     expect(endState.length).toBe(3);
 //     expect(endState[0].title).toBe(newTodolistTitle);
@@ -54,7 +54,7 @@ export {}
 //
 //     let newTodolistTitle = "New Todolist";
 //
-//     const endState = todolistsReducer(startState, changeTodolistTitleAC(todolistId2, newTodolistTitle));
+//     const endState = todolistsSlice(startState, changeTodolistTitleAC(todolistId2, newTodolistTitle));
 //
 //     expect(endState[0].title).toBe("What to learn");
 //     expect(endState[1].title).toBe(newTodolistTitle);
@@ -65,7 +65,7 @@ export {}
 //
 //     const action = changeTodolistFilterAC(todolistId2, newFilter)
 //
-//     const endState = todolistsReducer(startState, action);
+//     const endState = todolistsSlice(startState, action);
 //
 //     expect(endState[0].filter).toBe("all");
 //     expect(endState[1].filter).toBe(newFilter);
@@ -73,7 +73,7 @@ export {}
 // test('todolists should be set to the state', () => {
 //     const action = setTodolistsAc(startState)
 //
-//     const endState = todolistsReducer([], action)
+//     const endState = todolistsSlice([], action)
 //     expect(endState.length).toBe(2)
 // })
 // test('correct status of todolist should be changed', () => {
@@ -82,7 +82,7 @@ export {}
 //
 //     const action = changeTodolistEntityStatusAC(todolistId2, newStatus)
 //
-//     const endState = todolistsReducer(startState, action);
+//     const endState = todolistsSlice(startState, action);
 //
 //     expect(endState[0].entityStatus).toBe("idle");
 //     expect(endState[1].entityStatus).toBe(newStatus);

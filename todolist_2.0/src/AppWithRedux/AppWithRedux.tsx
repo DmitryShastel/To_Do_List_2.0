@@ -10,17 +10,17 @@ import {
     Typography
 } from '@mui/material';
 import {Menu} from "@mui/icons-material";
-import {TodolistList} from "../features/TodolistList/TdolistsList";
+import {TodolistList} from "../features/TodolistList/ui/TdolistsList";
 import {ErrorSnackbar} from "../components/common/ErrorSnackbar/ErrorSnackbar";
 import {useDispatch} from "react-redux";
 import {useAppSelector} from "../State/store";
-import {Login} from "../features/Login/Login";
+import {Login} from "../features/auth/ui/Login/Login";
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import {ThunkDispatch} from "redux-thunk";
 import {AnyAction} from "redux";
 import {selectIsInitialized, selectStatus} from "../App/hooks/use.app.selector";
-import {selectIsLoggedIn} from "../features/Login/use.login.selector";
-import {initializeApp, logout} from "../State/auth-reducer";
+import {selectIsLoggedIn} from "../features/auth/ui/Login/use.login.selector";
+import {initializeApp, logout} from "../features/auth/model/authSlice";
 
 
 type AppWithReduxType = {

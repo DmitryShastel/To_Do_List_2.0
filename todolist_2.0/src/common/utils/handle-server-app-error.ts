@@ -1,6 +1,6 @@
-import {BaseResponse2} from "../api/todolists-api";
 import {Dispatch} from "redux";
-import {setAppErrorAC, SetAppErrorActionType, setAppStatusAC, SetAppStatusActionType} from "../../State/app-reduser";
+import {setAppErrorAC, SetAppErrorActionType, setAppStatusAC, SetAppStatusActionType} from "../../State/appSlice";
+import {BaseResponse2} from "../../features/auth/api/authApi.types";
 
 export const handleServerAppError = <D>(data: BaseResponse2<D>,
                                         dispatch: Dispatch<SetAppErrorActionType | SetAppStatusActionType>,

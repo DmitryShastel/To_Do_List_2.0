@@ -1,18 +1,18 @@
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../State/store";
 import {useCallback} from "react";
-import {removeTask, updateTask} from "../../State/tasks-reducer";
+import {removeTask, updateTask} from "../../features/TodolistList/model/tasksSlice";
 import {
-    changeTodolistFilterAC,
+    changeTodolistFilter,
     changeTodolistTitle,
     FilterType,
     removeTodolist,
     TodolistDamainType
-} from "../../State/todolists-reducer";
-import {TaskStatuses, TasksType} from "../../common/api/todolists-api";
+} from "../../features/TodolistList/model/todolistsSlice";
 import {v1} from "uuid";
 import {ThunkDispatch} from "redux-thunk";
 import {AnyAction} from "redux";
+import {TaskStatuses, TasksType} from "../../features/TodolistList/api/tasksApi.types";
 
 
 export const useAppWithRedux = () => {
@@ -71,7 +71,7 @@ export const useAppWithRedux = () => {
         dispatch(changeTodolistTitle({id: todolistsId, title: newTitle}))
     }, []);
     let changeFilter = useCallback((todolistId: string, value: FilterType) => {
-        dispatch(changeTodolistFilterAC({id: todolistId, filter: value}))
+        dispatch(changeTodolistFilter({id: todolistId, filter: value}))
     }, []);
 
 

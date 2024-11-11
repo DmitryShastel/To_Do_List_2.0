@@ -5,7 +5,7 @@ import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../../State/store";
-import {setAppErrorAC} from "../../../State/app-reduser";
+import {setAppErrorAC} from "../../../State/appSlice";
 
 export function ErrorSnackbar() {
     //const [open, setOpen] = React.useState(false);

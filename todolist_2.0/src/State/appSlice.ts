@@ -1,4 +1,5 @@
-import {createSlice, PayloadAction} from "@reduxjs/toolkit";
+import {createSlice, isFulfilled, isPending, isRejected, PayloadAction} from "@reduxjs/toolkit";
+import {addTodolist} from "../features/TodolistList/model/todolistsSlice";
 
 
 const initialState: InitialStateType = {
@@ -14,12 +15,35 @@ const slice = createSlice({
         setAppStatusAC(state, action: PayloadAction<{ status: RequestStatusType }>) {
             state.status = action.payload.status
         },
-        setAppErrorAC(state, action: PayloadAction<{ error:  string | null }>) {
+        setAppErrorAC(state, action: PayloadAction<{ error: string | null }>) {
             state.error = action.payload.error
         },
         setIsInitializedAC(state, action: PayloadAction<{ isInitialized: boolean }>) {
             state.isInitialized = action.payload.isInitialized
         }
+    },
+    extraReducers: (builder) => {
+        builder
+            .addMatcher(isPending, (state) => {
+                    state.status = 'loading'
+                }
+            )
+            .addMatcher(isRejected, (state, action: any) => {
+                state.status = 'failed'
+
+                if(action.type === addTodolist.rejected.type) {
+                    return
+                }
+
+                if (action.payload) {
+                    state.error = action.payload.messages[0]
+                } else {
+                    state.error = action.error.message ? action.error.message : 'Some error occurred'
+                }
+            })
+            .addMatcher(isFulfilled, (state) => {
+                state.status = 'succeeded'
+            })
     }
 })
 

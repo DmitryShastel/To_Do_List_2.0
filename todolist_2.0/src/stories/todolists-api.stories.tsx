@@ -1,7 +1,7 @@
 export  {}
 
 // import {useEffect, useState} from "react";
-// import {todolistsAPI} from "../common/api/todolists-api";
+// import {todolistsApi} from "../common/api/todolists-api";
 //
 // export default {
 //     title: 'API'
@@ -11,7 +11,7 @@ export  {}
 //     const [state, setState] = useState<any>(null)
 //
 //     useEffect(() => {
-//         todolistsAPI.getTodolists()
+//         todolistsApi.getTodolists()
 //             .then((res) => {
 //                 setState(res.data)
 //             })
@@ -24,7 +24,7 @@ export  {}
 //     const [todolistId, setTodolistId] = useState<any>('')
 //
 //     const deleteTodolist = () => {
-//         todolistsAPI.deleteTodolist(todolistId)
+//         todolistsApi.deleteTodolist(todolistId)
 //             .then((res) => {
 //                 setState(res.data)
 //             })
@@ -44,7 +44,7 @@ export  {}
 //     const [todolistTitle, setTodolistTitle] = useState<any>('')
 //
 //     const createTodolist = () => {
-//         todolistsAPI.createTodolist(todolistTitle)
+//         todolistsApi.createTodolist(todolistTitle)
 //             .then((res) => {
 //                 setState(res.data)
 //             })
@@ -65,7 +65,7 @@ export  {}
 //     const [todolistId, setTodolistId] = useState<any>('')
 //
 //     const updateTodolist = () => {
-//         todolistsAPI.updateTodolist(todolistId, todolistTitle)
+//         todolistsApi.updateTodolist(todolistId, todolistTitle)
 //             .then((res) => {
 //                 setState(res.data)
 //             })
@@ -88,7 +88,7 @@ export  {}
 //     const [todolistId, setTodolistId] = useState<any>('')
 //
 //     const createTask = () => {
-//         todolistsAPI.createTask({todolistId, title})
+//         todolistsApi.createTask({todolistId, title})
 //             .then((res) => {
 //                 setState(res.data)
 //             })
@@ -111,7 +111,7 @@ export  {}
 //     const [todolistId, setTodolistId] = useState<any>('')
 //
 //     const getTasks = () => {
-//         todolistsAPI.getTasks(todolistId)
+//         todolistsApi.getTasks(todolistId)
 //             .then((res) => {
 //                 setState(res.data)
 //             })
@@ -132,7 +132,7 @@ export  {}
 //     const [todolistId, setTodolistId] = useState<string>('')
 //
 //     const deleteTask = () => {
-//         todolistsAPI.deleteTask(todolistId, taskId)
+//         todolistsApi.deleteTask(todolistId, taskId)
 //             .then((res) => {
 //                 setState(res.data)
 //             })
@@ -172,7 +172,7 @@ export  {}
 //     }
 //
 //     const updateTask = () => {
-//         todolistsAPI.updateTask(taskId, task, todolistId).then(res => {
+//         todolistsApi.updateTask(taskId, task, todolistId).then(res => {
 //             setState(res.data)
 //         })
 //     }

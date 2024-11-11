@@ -1,7 +1,7 @@
 export {}
 
-// import {addTodolistAC, TodolistDamainType, todolistsReducer} from "./todolists-reducer";
-// import {tasksReducer} from "./tasks-reducer";
+// import {addTodolistAC, TodolistDamainType, todolistsSlice} from "./todolists-reducer";
+// import {tasksSlice} from "./tasks-reducer";
 // import {TasksType, TodolistType} from "../api/todolists-api";
 // import {v1} from "uuid";
 //
@@ -18,8 +18,8 @@ export {}
 //
 //     const action = addTodolistAC(newTodolist);
 //
-//     const endTasksState = tasksReducer(startTasksState, action)
-//     const endTodolistsState = todolistsReducer(startTodolistsState, action)
+//     const endTasksState = tasksSlice(startTasksState, action)
+//     const endTodolistsState = todolistsSlice(startTodolistsState, action)
 //
 //     const keys = Object.keys(endTasksState);
 //     const idFromTasks = keys[0];

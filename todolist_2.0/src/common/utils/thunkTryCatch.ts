@@ -1,4 +1,4 @@
-import {setAppStatusAC} from "../../State/app-reduser";
+import {setAppStatusAC} from "../../State/appSlice";
 import {handleServerNetworkError} from "./handle-server-network-error";
 
 export const thunkTryCatch = async (thunkAPI: any, logic: () => Promise<any>) => {

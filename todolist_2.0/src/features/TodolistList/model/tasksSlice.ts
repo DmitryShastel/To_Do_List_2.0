@@ -1,19 +1,19 @@
-import {addTodolist, fetchTodolists, removeTodolist} from "./todolists-reducer";
+import {addTodolist, fetchTodolists, FilterType, removeTodolist} from "./todolistsSlice";
+import {appActions} from "../../../State/appSlice";
+import {createSlice, PayloadAction} from "@reduxjs/toolkit";
+import {clearTasksAndTodolists, ClearTasksAndTodolistsType} from "../../../common/actions/common.actions";
+import {createAppAsyncThunk} from "../../../common/utils/create.app.asynk.thunk";
+import {handleServerAppError} from "../../../common/utils/handle-server-app-error";
+import {thunkTryCatch} from "../../../common/utils/thunkTryCatch";
 import {
     AddTaskArgs,
     TaskPriorities,
     TaskStatuses,
     TasksType,
     TaskType,
-    todolistsAPI,
     UpdateTaskModelType
-} from "../common/api/todolists-api";
-import {appActions} from "./app-reduser";
-import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {clearTasksAndTodolists, ClearTasksAndTodolistsType} from "../common/actions/common.actions";
-import {createAppAsyncThunk} from "../common/utils/create.app.asynk.thunk";
-import {handleServerAppError} from "../common/utils/handle-server-app-error";
-import {thunkTryCatch} from "../common/utils/thunkTryCatch";
+} from "../api/tasksApi.types";
+import {taskApi} from "../api/tasksApi";
 
 
 export type UpdateDomainTaskModelType = {
@@ -81,6 +81,23 @@ const slice = createSlice({
             }
         )
     },
+    selectors: {
+        selectTasks: (state) => state,
+        selectFilteredTasks: (state, todolistId: string, filter: FilterType) => {
+            let tasks = state[todolistId]
+
+            // const {id, filter} = todolist
+
+            if (filter === 'completed') {
+                tasks = tasks.filter(t => t.status === TaskStatuses.Completed)
+            }
+            if (filter === 'active') {
+                tasks = tasks.filter(t => t.status === TaskStatuses.New)
+            }
+
+            return tasks
+        }
+    }
 })
 
 
@@ -88,13 +105,13 @@ export const addTask = createAppAsyncThunk<{ task: TaskType }, AddTaskArgs>(`${s
     async (arg, thunkAPI) => {
         const {dispatch, rejectWithValue} = thunkAPI
         return thunkTryCatch(thunkAPI, async () => {
-            const res = await todolistsAPI.createTask(arg)
+            const res = await taskApi.createTask(arg)
             if (res.data.resultCode === 0) {
                 const task = res.data.data.item
                 return {task}
             } else {
-                handleServerAppError(res.data, dispatch)
-                return rejectWithValue(null)
+                handleServerAppError(res.data, dispatch, false)
+                return rejectWithValue(res.data)
             }
         })
     })
@@ -109,7 +126,7 @@ export const fetchTasks = createAppAsyncThunk<{
         const {dispatch, rejectWithValue} = thunkAPI
 
         return thunkTryCatch(thunkAPI, async () => {
-            const res = await todolistsAPI.getTasks(todolistId)
+            const res = await taskApi.getTasks(todolistId)
             const tasks = res.data.items
             return {tasks, todolistId}
         })
@@ -139,7 +156,7 @@ export const updateTask = createAppAsyncThunk<any, any>
             ...arg.domainModel
         }
 
-        const res = await todolistsAPI.updateTask(arg.taskId, apiModel, arg.todolistId)
+        const res = await taskApi.updateTask(arg.taskId, apiModel, arg.todolistId)
         if (res.data.resultCode === 0) {
             return {taskId: arg.taskId, model: arg.domainModel, todolistId: arg.todolistId}
         } else {
@@ -149,12 +166,13 @@ export const updateTask = createAppAsyncThunk<any, any>
     })
 })
 
-
 export const removeTask = createAppAsyncThunk(`${slice.name}/removeTask`,
     async (arg: { todolistId: string, taskId: string }, thunkAPI) => {
-        const res = await todolistsAPI.deleteTask(arg.todolistId, arg.taskId)
+        const res = await taskApi.deleteTask(arg.todolistId, arg.taskId)
         return {todolistId: arg.todolistId, taskId: arg.taskId}
     })
 
 
-export const tasksReducer = slice.reducer
+export const tasksSlice = slice.reducer
+export const taskThunks = {updateTask, fetchTasks, addTask, removeTask}
+export const {selectTasks, selectFilteredTasks} = slice.selectors
