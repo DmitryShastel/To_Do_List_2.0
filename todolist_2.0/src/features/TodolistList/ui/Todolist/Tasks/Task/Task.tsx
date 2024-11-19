@@ -6,8 +6,8 @@ import {TaskStatuses, TaskType} from "../../../../api/tasksApi.types";
 import {ThunkDispatch} from "redux-thunk";
 import {AnyAction} from "redux";
 import {useDispatch} from "react-redux";
-import {removeTask, updateTask} from "../../../../model/tasksSlice";
 import  s from './task.module.css'
+import {tasksActions} from "../../../../model/tasksSlice";
 
 
 export type Props = {
@@ -23,16 +23,16 @@ export const Task = ({task, todolistId}: Props) => {
 
 
     const removeTaskHandler = () => {
-        dispatch(removeTask({todolistId, taskId}))
+        dispatch(tasksActions.removeTask({todolistId, taskId}))
     }
 
     const changeTaskStatusHandler = (e: ChangeEvent<HTMLInputElement>) => {
         let status = e.currentTarget.checked ? TaskStatuses.Completed : TaskStatuses.New
-        dispatch(updateTask({taskId, domainModel: {status}, todolistId}))
+        dispatch(tasksActions.updateTask({taskId, domainModel: {status}, todolistId}))
     }
 
     const changeTaskTitleHandler = (newValue: string) => {
-        dispatch(updateTask({taskId, domainModel: {title: newValue}, todolistId}))
+        dispatch(tasksActions.updateTask({taskId, domainModel: {title: newValue}, todolistId}))
     }
 
     return (

@@ -119,15 +119,6 @@ const slice = createAppSlice({
 })
 
 
-export const {
-    changeTodolistFilter,
-} = slice.actions
-
-
+export const {changeTodolistFilter} = slice.actions
 export const todolistsReducer = slice.reducer
-//export const todolistActions = slice.actions
 export const todolistsActions = slice.actions
-//export const todolistThunks = {fetchTodolists, addTodolist, removeTodolist, changeTodolistTitle}
-//export const {fetchTodolists, addTodolist, removeTodolist, changeTodolistTitle} = slice.actions
-//export const {selectTodolists} = slice.selectors
-//export const todolistsPath = slice.reducerPath

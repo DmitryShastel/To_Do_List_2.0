@@ -13,16 +13,6 @@ type Props = {
 export const Tasks = ({todolist}: Props) => {
 
 
-    // const {id, filter} = todolist
-    //
-    //
-    // if (filter === 'completed') {
-    //     tasks = tasks.filter(t => t.status === TaskStatuses.Completed)
-    // }
-    // if (filter === 'active') {
-    //     tasks = tasks.filter(t => t.status === TaskStatuses.New)
-    // }
-
     const filteredTasks = useSelector((state: AppRootStateType) =>
         selectFilteredTasks(state, todolist.id, todolist.filter))
 

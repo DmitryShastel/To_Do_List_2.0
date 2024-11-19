@@ -1,7 +1,6 @@
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../State/store";
 import {useCallback} from "react";
-import {removeTask, updateTask} from "../../features/TodolistList/model/tasksSlice";
 import {
     changeTodolistFilter,
     FilterType,
@@ -11,6 +10,7 @@ import {v1} from "uuid";
 import {ThunkDispatch} from "redux-thunk";
 import {AnyAction} from "redux";
 import {TaskStatuses, TasksType} from "../../features/TodolistList/api/tasksApi.types";
+import {tasksActions} from "../../features/TodolistList/model/tasksSlice";
 
 
 
@@ -20,13 +20,13 @@ export const useAppWithRedux = () => {
     const dispatch: ThunkDispatch<any, any, AnyAction> = useDispatch()
 
     let changeTaskTitle = useCallback((taskId: string, title: string, todolistId: string) => {
-        dispatch(updateTask({taskId,title, todolistId}));
+        dispatch(tasksActions.updateTask({taskId,title, todolistId}));
     }, []);
     let changeStatus = useCallback((taskId: string, status: TaskStatuses, todolistId: string) => {
-        dispatch(updateTask({taskId, status, todolistId}))
+        dispatch(tasksActions.updateTask({taskId, status, todolistId}))
     }, []);
     let removeTaskCallback = useCallback((todolistId: string, taskId: string) => {
-        dispatch(removeTask({todolistId, taskId}))
+        dispatch(tasksActions.removeTask({todolistId, taskId}))
     }, []);
     let addTask = useCallback((todolistId: string, taskTitle: string) => {
 

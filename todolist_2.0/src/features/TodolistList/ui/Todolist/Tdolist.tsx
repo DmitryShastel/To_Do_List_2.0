@@ -2,10 +2,10 @@ import React, {useEffect} from "react";
 import {AddItemForm} from "../../../../components/AddItemForm";
 import {TodolistDamainType} from "../../model/todolistsSlice";
 import {useAppDispatch} from "../../../../hooks/useAppDispatch";
-import {taskThunks} from "../../model/tasksSlice";
 import {FilterTasksButtons} from "./FilterTasksButtons/FilterTasksButtons";
 import {Tasks} from "./Tasks/Tasks";
 import {TodolistTitle} from "./TodolistTitle/TodolistTitle";
+import {tasksActions} from "../../model/tasksSlice";
 
 
 type Props = {
@@ -21,12 +21,12 @@ export const Todolist = ({demo = false, todolist}: Props) => {
         if (demo) {
             return
         }
-        dispatch(taskThunks.fetchTasks(todolist.id))
+        dispatch(tasksActions.fetchTasks(todolist.id))
     }, [])
 
 
     const addTask = (title: string) => {
-        return dispatch(taskThunks.addTask({todolistId: todolist.id, title}))
+        return dispatch(tasksActions.addTask({todolistId: todolist.id, title}))
     }
 
 
