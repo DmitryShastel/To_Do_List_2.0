@@ -2,17 +2,17 @@ import React from 'react';
 import {Provider} from "react-redux";
 import {AppRootStateType} from "../../State/store";
 import {applyMiddleware, combineReducers, createStore} from "redux";
-import {tasksSlice} from "../../features/TodolistList/model/tasksSlice";
-import {todolistsSlice} from "../../features/TodolistList/model/todolistsSlice";
 import {v1} from "uuid";
 import {appReducer} from "../../State/appSlice";
 import {thunk as thunkMiddleware} from 'redux-thunk'
 import {authSlice} from "../../features/auth/model/authSlice";
 import {TaskPriorities, TaskStatuses} from "../../features/TodolistList/api/tasksApi.types";
+import {tasksReducer} from "../../features/TodolistList/model/tasksSlice";
+import {todolistsReducer} from "../../features/TodolistList/model/todolistsSlice";
 
 const rootReducer = combineReducers({
-    tasks: tasksSlice,
-    todolists: todolistsSlice,
+    tasks: tasksReducer,
+    todolists: todolistsReducer,
     app: appReducer,
     auth: authSlice
 })

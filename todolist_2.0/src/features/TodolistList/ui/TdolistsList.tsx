@@ -1,8 +1,7 @@
-import React, {useCallback, useEffect} from "react";
+import React, {useEffect} from "react";
 import {ThunkDispatch} from "redux-thunk";
 import {AnyAction} from "redux";
 import {useDispatch} from "react-redux";
-import {addTodolist, fetchTodolists,} from "../model/todolistsSlice";
 import {Grid, Paper} from "@mui/material";
 import {AddItemForm} from "../../../components/AddItemForm";
 import {Navigate} from "react-router-dom";
@@ -10,6 +9,7 @@ import {selectTodolists} from "../../../hooks/use.todo.selector";
 import {selectIsLoggedIn} from "../../auth/ui/Login/use.login.selector";
 import {useAppSelector} from "../../../State/store";
 import {Todolist} from "./Todolist/Tdolist";
+import {todolistsActions} from "../model/todolistsSlice";
 
 
 type TodolistPropsType = {
@@ -28,13 +28,13 @@ export const TodolistList: React.FC<TodolistPropsType> = ({demo = false, ...prop
         if (demo || !isLoggedIn) {
             return
         }
-        dispatch(fetchTodolists())
+        dispatch(todolistsActions.fetchTodolists())
     }, [])
 
 
-    const addTodolistCallback = useCallback((titleTodolist: string) => {
-        return dispatch(addTodolist(titleTodolist))
-    }, [])
+    const addTodolistCallback = (titleTodolist: string) => {
+        return dispatch(todolistsActions.addTodolist(titleTodolist))
+    }
 
 
     if (!isLoggedIn) {

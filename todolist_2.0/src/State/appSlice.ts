@@ -1,5 +1,7 @@
 import {createSlice, isFulfilled, isPending, isRejected, PayloadAction} from "@reduxjs/toolkit";
-import {addTodolist} from "../features/TodolistList/model/todolistsSlice";
+import {todolistsActions} from "../features/TodolistList/model/todolistsSlice";
+
+
 
 
 const initialState: InitialStateType = {
@@ -30,11 +32,9 @@ const slice = createSlice({
             )
             .addMatcher(isRejected, (state, action: any) => {
                 state.status = 'failed'
-
-                if(action.type === addTodolist.rejected.type) {
+                if(action.type === todolistsActions.addTodolist.rejected.type) {
                     return
                 }
-
                 if (action.payload) {
                     state.error = action.payload.messages[0]
                 } else {

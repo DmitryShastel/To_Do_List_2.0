@@ -4,15 +4,14 @@ import {useCallback} from "react";
 import {removeTask, updateTask} from "../../features/TodolistList/model/tasksSlice";
 import {
     changeTodolistFilter,
-    changeTodolistTitle,
     FilterType,
-    removeTodolist,
     TodolistDamainType
 } from "../../features/TodolistList/model/todolistsSlice";
 import {v1} from "uuid";
 import {ThunkDispatch} from "redux-thunk";
 import {AnyAction} from "redux";
 import {TaskStatuses, TasksType} from "../../features/TodolistList/api/tasksApi.types";
+
 
 
 export const useAppWithRedux = () => {
@@ -84,7 +83,7 @@ export const useAppWithRedux = () => {
         changeStatus,
         removeTodolistCallback,
         addTodolist,
-        changeTodolistTitle,
+        // changeTodolistTitle,
         changeFilter
     }
 };

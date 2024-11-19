@@ -12,6 +12,7 @@ type Props = {
 
 export const Tasks = ({todolist}: Props) => {
 
+
     // const {id, filter} = todolist
     //
     //
